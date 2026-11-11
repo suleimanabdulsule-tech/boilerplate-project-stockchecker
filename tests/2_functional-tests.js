@@ -46,6 +46,7 @@ suite('Functional Tests', function () {
 
   test('Viewing one stock', async function () {
     const response = await requestStock('stock=GOOG');
+    assert.property(response.body, 'stockData');
     checkSingle(response, 'GOOG');
   });
 
@@ -66,6 +67,7 @@ suite('Functional Tests', function () {
 
   test('Viewing two stocks', async function () {
     const response = await requestStock('stock=GOOG&stock=MSFT');
+    assert.isArray(response.body.stockData);
     checkPair(response, 'GOOG', 'MSFT');
   });
 
